@@ -1,0 +1,4 @@
+{
+	"name":"English::vocabulary",
+	"fields": ["Vocab", "Part-of-speech", "Definition", "Sentence-1"]
+}
