@@ -1,4 +1,5 @@
 {
-	"deck":"Programming::vim",
+	"deckName":"Programming::vim",
+	"modelName":"Programming::vim",
 	"fields": ["command", "action"]
 }

@@ -1,6 +1,7 @@
 import sys
 import re
 import json
+from invoke import invoke
 
 filename = sys.argv[1]
 
@@ -12,18 +13,15 @@ with open(filename) as file:
         print(name)
         with open(name+".json") as jsonfile:
             data = json.load(jsonfile)
-            for i in data["fields"]:
-                print(i)
+            result_add_deck = invoke("createDeck", deck=data["deckName"])
     for line in file:
-        if line.strip():
-            args = re.split(r"\s[-]\s", line.strip())
+        if not line[0] == "$" and line.strip():
+            args = re.split(r"\s[-]\s|[;]", line.strip())
             x = dict(zip(data["fields"], args))
             print(x)
+            result_add_note = invoke("addNotes", notes=[{"deckName":data["deckName"], "modelName":data["modelName"], "fields": x, "tags":[]}])
+            print(result_add_note)
 
-#            if len(args) == 2:
-#                command = args[0].strip(' `')
-#                action = args[1].strip()
-#                print("command: {} action: {}".format(command, action))
 
 # the output of that file needs to be in the form [{elements in the line}]
                 
